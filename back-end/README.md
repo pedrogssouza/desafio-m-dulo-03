@@ -296,6 +296,16 @@ Ela deverá:
 
 ---
 
+- [Hash](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/02/08/2021/aula/da199599-1862-4164-82e6-983bb31bfa07/51b1a3a0-e86d-4526-b2db-770d8d3d13ae)
+- [Criando tokens no login](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/02/08/2021/aula/da199599-1862-4164-82e6-983bb31bfa07/364f738d-f450-495a-bbb1-74c0ad554816) 
+- [Utilizando tokens](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/02/08/2021/aula/da199599-1862-4164-82e6-983bb31bfa07/cf0eae1a-5b2f-4b3e-a1cd-ee527f652928)
+- [Configurando conexão com o banco](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/26/07/2021/aula/cc6d18ee-3e8d-42bd-aecc-b4793c28bc04/9885e010-b6c1-4da7-9f02-658855b6a2a0)
+- [Listando e obtendo autor](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/26/07/2021/aula/cc6d18ee-3e8d-42bd-aecc-b4793c28bc04/15c313da-7230-4dff-b586-f24dea3d773f)
+- [Cadastrando o autor](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/26/07/2021/aula/cc6d18ee-3e8d-42bd-aecc-b4793c28bc04/2fe2c0e2-d11c-470d-97eb-de089bf82690)
+- [Atualizando autor](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/26/07/2021/aula/cc6d18ee-3e8d-42bd-aecc-b4793c28bc04/980333af-cab3-4c5d-93e6-c8576ad4a36f)
+- [Excluindo autor](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/26/07/2021/aula/cc6d18ee-3e8d-42bd-aecc-b4793c28bc04/937087db-8616-4a21-8e77-48b90548f846)
+- [Consultas SQL](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/30/06/2021/aula/62c42822-3827-4cdb-b803-9bd6d79a4c9c/)
+
 Api de Exemplo: https://desafio-m03.herokuapp.com
 
 Obs.: A collection do insomnia está anexada a esse repositório.
