@@ -14,7 +14,7 @@ Telas que precisam ser desenvolvidas:
 
 ## Áreas não protegidas
 
-### Cadastro de usuário: `/cadastro`
+### Cadastro de usuário: `/cadastro` (Obrigatório)
 - Funcionalidades obrigatórias:
     - Validar a igualdade das senhas
     - Validar os campos obrigatórios (consultar nos requisitos do back-end)
@@ -43,7 +43,7 @@ Telas que precisam ser desenvolvidas:
 
 
 
-### Login: `/`
+### Login: `/`(Obrigatório)
 - Funcionalidades obrigatórias:
     - Validar os campos obrigatórios (consultar nos requisitos do back-end)
     - Enviar os dados do formulário para a rota `POST /login`
@@ -70,7 +70,7 @@ Telas que precisam ser desenvolvidas:
 
 ## Áreas protegidas
 
-### Produtos: `/produtos`
+### Produtos: `/produtos`(Extra)
 
 - Funcionalidades obrigatórias:
     - Carregamento dos produtos da loja (`GET /produtos`)
@@ -92,7 +92,7 @@ Telas que precisam ser desenvolvidas:
     </ul>
 </details>
 
-### Editar Produtos: `/produtos/:id/editar`
+### Editar Produtos: `/produtos/:id/editar`(Extra)
 
 - Funcionalidades obrigatórias:
     - Como a atualização dos dados do produto pode ser parcial (somente um campo por ex), não é obrigatório carregar os dados do produto nesta tela e nem verificar os dados obrigatórios.
@@ -121,7 +121,7 @@ Telas que precisam ser desenvolvidas:
     </ul>
 </details>
 
-### Adicionar Produtos: `/produtos/novo`
+### Adicionar Produtos: `/produtos/novo`(Extra)
 
 - Funcionalidades obrigatórias:
     - Enviar os dados do formulário para a rota `POST /produtos`
@@ -148,7 +148,7 @@ Telas que precisam ser desenvolvidas:
     </ul>
 </details>
 
-### Perfil de usuário: `/perfil`
+### Perfil de usuário: `/perfil`(Extra)
 
 - Funcionalidades obrigatórias:
     - Visualização dos dados do perfil.
@@ -172,7 +172,7 @@ Telas que precisam ser desenvolvidas:
     </ul>
 </details>
 
-### Edição de usuário: `/perfil/editar`
+### Edição de usuário: `/perfil/editar`(Extra)
 
 - Funcionalidades obrigatórias:
     - Como a atualização dos dados do perfil pode ser parcial (somente um campo por ex), não é obrigatório carregar os dados do usuário nesta tela e nem verificar os dados obrigatórios.
