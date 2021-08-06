@@ -243,19 +243,18 @@ Telas que precisam ser desenvolvidas:
 
 
 ## Aulas Úteis
-- [Context](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/24/05/2021/aula/40d22af1-7ae3-48ee-84e0-dc4858a46729/c882bfa1-fa0b-4b1a-86d6-f1ea094e2377)
-- [Gerenciando o estado de aplicações](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/26/05/2021/aula/812c9c5f-2657-4228-a3a9-e430036a421b/e0680e8a-8baf-4118-8b91-7f34930099a7)
-- [Opções com o Fetch](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/26/05/2021/aula/812c9c5f-2657-4228-a3a9-e430036a421b/986936fb-e2d6-4f8c-803c-2f2aceb4200c)
-- [Estilizando links ativos](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/31/05/2021/aula/092b294b-776e-485d-bd9f-14131cc48062/0f47afe2-a658-4b69-b2d2-f010eae5fa9a)
-- [Rotas protegidas](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/31/05/2021/aula/092b294b-776e-485d-bd9f-14131cc48062/380ba9df-4876-4ac5-b975-8290ade35a0e)
-- [Redirecionamento de rotas](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/31/05/2021/aula/092b294b-776e-485d-bd9f-14131cc48062/ed0feaa8-dbb3-4404-a6f1-30a42fe6e701)
-- [Parametros de rota](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/31/05/2021/aula/092b294b-776e-485d-bd9f-14131cc48062/009aca52-7f2e-4674-9716-dff03899d91f)
-- [Apresentando o react-hook-form](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/02/06/2021/aula/0c0ad3ca-7ca0-4d09-8852-7f8d421948c9/4cc61e3f-9eed-48ba-9b6b-0c61636a8bf1)
-- [Validações com o react-hook-form](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/02/06/2021/aula/0c0ad3ca-7ca0-4d09-8852-7f8d421948c9/c5ac1755-4b9c-46f4-850f-8bd053174047)
-- [useLocalStorage](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/07/06/2021/aula/7efd6594-b8d9-4c0c-a41e-5eb168e84dba/72bb0203-1b58-4e9d-9bed-1a0f854e7263)
-- [Primeiros componentes do Material UI](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/07/06/2021/aula/7efd6594-b8d9-4c0c-a41e-5eb168e84dba/acda31cc-43cf-4dc8-be51-738b38aa0d66)
-- [Resumão React](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/09/06/2021/aula/8b162b03-22e3-4c49-bf9f-d5388ae852c2/e12396ad-5ca2-4ad8-9303-c1c6b36e12e7)
-- [Continuação Resumão](https://plataforma.cubos.academy/curso/56bc9b33-842d-48ae-94ad-32d5e7a52b8d/data/11/06/2021/aula/8f161266-3cc9-491e-8ac2-6a5611fc719d/3abac795-c391-48ca-8c22-ec34ce62b381)
+- [Context](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/06/07/2021/aula/2fe44792-7fe4-4d24-85ef-e1def5bc0b7a/871071bd-177c-4fcd-89fc-1151bc1fe1d2)
+- [Gerenciando o estado de aplicações](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/03/06/2021/aula/434c58b2-88f1-43fb-856a-71d6ef54803d/863715e0-b81e-4e9d-b6a2-9f4d43f65f95)
+- [Opções com o Fetch](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/03/06/2021/aula/434c58b2-88f1-43fb-856a-71d6ef54803d/a82f81fb-4ce7-44c4-b966-cf2d15ae62de)
+- [Rotas protegidas](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/13/07/2021/aula/f312cf10-bd30-4b39-86c2-4ca03bd634a1/34602cbb-1dc3-4c8d-b77d-e3fff3286a62)
+- [Redirecionamento de rotas](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/13/07/2021/aula/f312cf10-bd30-4b39-86c2-4ca03bd634a1/93efaf25-386f-4eb2-beae-7183f9d94b11)
+- [Parametros de rota](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/13/07/2021/aula/f312cf10-bd30-4b39-86c2-4ca03bd634a1/330aa980-4b0e-4f2c-94b1-668ccb084112)
+- [Apresentando o react-hook-form](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/20/07/2021/aula/c81f0775-c014-4e2f-a453-5d235eb1fac4/dd2a8627-661e-419b-be26-a7888047301f)
+- [Validações com o react-hook-form](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/20/07/2021/aula/c81f0775-c014-4e2f-a453-5d235eb1fac4/6b7f1095-de8b-4a36-93b6-30aa18d00309)
+- [useLocalStorage](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/27/07/2021/aula/33ba2718-bd74-432f-ae55-e9694be33884/846280b3-7940-4138-afaf-b1e5fe2711e2)
+- [Primeiros componentes do Material UI](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/27/07/2021/aula/33ba2718-bd74-432f-ae55-e9694be33884/4fda4fbc-154d-4396-9d9e-829052b9697d)
+- [Resumão React](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/03/08/2021/aula/1fe16ca2-462a-4b2b-bd89-45df7f004293/)
+- [Continuação Resumão](https://plataforma.cubos.academy/curso/61b2921e-a262-4f04-b943-89c4cfb15e5c/data/05/08/2021/aula/370c0275-0aef-4d37-b2dd-dc399a502bcb/)
 
 **LEMBRE-SE**: Feito é melhor que perfeito!!!
 
