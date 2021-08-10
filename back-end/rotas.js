@@ -5,6 +5,7 @@ const rotas = express();
 
 rotas.post("/cadastro", usuario.cadastrarUsuario);
 rotas.post("/login", usuario.login);
-rotas.get("/perfil", usuario.obterPerfil);
+rotas.get("/perfil", usuario.obterUsuario);
+rotas.put("/perfil", usuario.atualizarUsuario);
 
 module.exports = rotas;

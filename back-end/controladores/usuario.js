@@ -83,7 +83,7 @@ async function login(req, res) {
         try {
           const hash = (await pwd.hash(Buffer.from(senha))).toString("hex");
 
-          const query = `update usuarios set senha = $1 where email = $2 values($1,$2,$3,$4)`;
+          const query = `update usuarios set senha = $1 where email = $2`;
           await conexao.query(query, [hash, email]);
         } catch {}
         break;
@@ -115,19 +115,70 @@ async function login(req, res) {
   }
 }
 
-async function obterPerfil(req, res) {
-  const token = req.headers.authorization.replace("Bearer ", "");
+async function obterUsuario(req, res) {
+  try {
+    const token = req.headers.authorization.replace("Bearer ", "");
 
-  const { id } = jwt.verify(token, jwtSecret);
+    const { id } = jwt.verify(token, jwtSecret);
 
-  const query = `select id,nome,email,nome_loja from usuarios where id = $1`;
-  const usuario = await conexao.query(query, [id]);
+    const query = `select id,nome,email,nome_loja from usuarios where id = $1`;
+    const usuario = await conexao.query(query, [id]);
 
-  res.json(usuario.rows[0]);
+    return res.status(200).json(usuario.rows[0]);
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
+async function atualizarUsuario(req, res) {
+  try {
+    const { nome, email, senha, nome_loja } = req.body;
+    const token = req.headers.authorization.replace("Bearer ", "");
+    const { id } = jwt.verify(token, jwtSecret);
+
+    if (!nome) {
+      return res.status(400).json("O nome é um campo obrigatório");
+    }
+    if (!email) {
+      return res.status(400).json("O email é um campo obrigatório");
+    }
+    if (!senha) {
+      return res.status(400).json("A senha é um campo obrigatório");
+    }
+    if (!nome_loja) {
+      return res.status(400).json("O nome da loja é um campo obrigatório");
+    }
+
+    const usuario = await conexao.query(
+      "select * from usuarios where id = $1",
+      [id]
+    );
+
+    if (email !== usuario.email) {
+      const buscaDeUsuarioPeloEmail = await conexao.query(
+        "select * from usuarios where email=$1",
+        [email]
+      );
+
+      if (buscaDeUsuarioPeloEmail.rowCount > 0) {
+        return res.status(400).json("Esse email já foi cadastrado");
+      }
+    }
+
+    const hash = (await pwd.hash(Buffer.from(senha))).toString("hex");
+
+    const query = `update usuarios set nome=$1, email=$2, senha=$3, nome_loja=$4 where id = $5 `;
+    await conexao.query(query, [nome, email, hash, nome_loja, id]);
+
+    res.status(200).json("Usuário atualizado com sucesso!");
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
 }
 
 module.exports = {
   cadastrarUsuario,
   login,
-  obterPerfil,
+  obterUsuario,
+  atualizarUsuario,
 };
