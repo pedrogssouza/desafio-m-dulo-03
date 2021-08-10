@@ -1,9 +1,10 @@
- const express = require("express");
- const {cadastrarUsuario} = require("./controladores/usuario");
+const express = require("express");
+const usuario = require("./controladores/usuario");
 
 const rotas = express();
 
-rotas.post("/cadastro", cadastrarUsuario)
+rotas.post("/cadastro", usuario.cadastrarUsuario);
+rotas.post("/login", usuario.login);
+rotas.get("/perfil", usuario.obterPerfil);
 
-
-module.exports = rotas
+module.exports = rotas;

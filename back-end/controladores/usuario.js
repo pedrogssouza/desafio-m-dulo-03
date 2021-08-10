@@ -1,6 +1,7 @@
 const conexao = require("../conexao.js");
-
 const securePassword = require("secure-password");
+const jwt = require("jsonwebtoken");
+const jwtSecret = require("../jwt_secret");
 
 const pwd = securePassword();
 
@@ -47,6 +48,86 @@ async function cadastrarUsuario(req, res) {
   }
 }
 
+async function login(req, res) {
+  const { email, senha } = req.body;
+
+  if (!email) {
+    return res.status(400).json("O email é um campo obrigatório");
+  }
+  if (!senha) {
+    return res.status(400).json("A senha é um campo obrigatório");
+  }
+
+  try {
+    const query = `select * from usuarios where email = $1`;
+    const usuarios = await conexao.query(query, [email]);
+
+    if (usuarios.rowCount === 0) {
+      return res.status(400).json("Email ou senha incorretos");
+    }
+
+    const usuario = usuarios.rows[0];
+
+    const result = await pwd.verify(
+      Buffer.from(senha),
+      Buffer.from(usuario.senha, "hex")
+    );
+
+    switch (result) {
+      case securePassword.INVALID_UNRECOGNIZED_HASH:
+      case securePassword.INVALID:
+        return res.status(400).json("Email ou senha incorretos");
+      case securePassword.VALID:
+        break;
+      case securePassword.VALID_NEEDS_REHASH:
+        try {
+          const hash = (await pwd.hash(Buffer.from(senha))).toString("hex");
+
+          const query = `update usuarios set senha = $1 where email = $2 values($1,$2,$3,$4)`;
+          await conexao.query(query, [hash, email]);
+        } catch {}
+        break;
+    }
+
+    const token = jwt.sign(
+      {
+        ...usuario,
+        senha: undefined,
+      },
+      jwtSecret,
+      { expiresIn: "1h" }
+    );
+
+    const usuarioFormatado = {
+      id: usuario.id,
+      nome: usuario.nome,
+      email: usuario.email,
+      nome_loja: usuario.nome_loja,
+    };
+
+    const response = {
+      usuario: usuarioFormatado,
+      token: token,
+    };
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
+async function obterPerfil(req, res) {
+  const token = req.headers.authorization.replace("Bearer ", "");
+
+  const { id } = jwt.verify(token, jwtSecret);
+
+  const query = `select id,nome,email,nome_loja from usuarios where id = $1`;
+  const usuario = await conexao.query(query, [id]);
+
+  res.json(usuario.rows[0]);
+}
+
 module.exports = {
   cadastrarUsuario,
+  login,
+  obterPerfil,
 };
