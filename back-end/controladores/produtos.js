@@ -53,7 +53,46 @@ async function obterProdutoPorId(req, res) {
   }
 }
 
+async function cadastrarProduto(req, res) {
+  try {
+    const { nome, estoque, categoria, preco, descricao, imagem } = req.body;
+    const token = req.headers.authorization.replace("Bearer ", "");
+    const { id: usuario_id } = jwt.verify(token, jwtSecret);
+    if (!nome) {
+      return res.status(400).json("O nome é um campo obrigatório");
+    }
+    if (!estoque) {
+      return res.status(400).json("O estoque é um campo obrigatório");
+    }
+    if (!preco) {
+      return res.status(400).json("O preço é um campo obrigatório");
+    }
+    if (!descricao) {
+      return res.status(400).json("A descrição é um campo obrigatório");
+    }
+
+    const query = `
+    insert into produtos(nome, estoque, categoria, preco, descricao, imagem,usuario_id)
+    values($1,$2,$3,$4,$5,$6,$7)
+    `;
+    await conexao.query(query, [
+      nome,
+      estoque,
+      categoria,
+      preco,
+      descricao,
+      imagem,
+      usuario_id,
+    ]);
+
+    res.status(201).json("Produto cadastrado!");
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
 module.exports = {
   obterProdutos,
   obterProdutoPorId,
+  cadastrarProduto,
 };
