@@ -10,5 +10,6 @@ rotas.get("/perfil", usuario.obterUsuario);
 rotas.put("/perfil", usuario.atualizarUsuario);
 
 rotas.get("/produtos", produtos.obterProdutos);
+rotas.get("/produtos/:id", produtos.obterProdutoPorId);
 
 module.exports = rotas;

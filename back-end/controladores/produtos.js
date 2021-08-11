@@ -26,6 +26,34 @@ async function obterProdutos(req, res) {
   }
 }
 
+async function obterProdutoPorId(req, res) {
+  try {
+    const token = req.headers.authorization.replace("Bearer ", "");
+    const { id: usuario_id } = jwt.verify(token, jwtSecret);
+    const id = req.params.id;
+
+    const produto = await conexao.query(
+      `select * from produtos where id = $1`,
+      [id]
+    );
+
+    if (produto.rowCount > 0) {
+      if (produto.rows[0].usuario_id === usuario_id) {
+        res.status(200).json(produto.rows[0]);
+      } else {
+        res.status(401).json("Você não possui esse produto cadastrado");
+      }
+    } else {
+      return res
+        .status(400)
+        .json("O Id informado não corresponde à nenhum produto");
+    }
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
 module.exports = {
   obterProdutos,
+  obterProdutoPorId,
 };
