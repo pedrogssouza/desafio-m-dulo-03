@@ -91,8 +91,65 @@ async function cadastrarProduto(req, res) {
   }
 }
 
+async function atualizarProduto(req, res) {
+  try {
+    const { nome, estoque, categoria, preco, descricao, imagem } = req.body;
+    const token = req.headers.authorization.replace("Bearer ", "");
+    const { id: usuario_id } = jwt.verify(token, jwtSecret);
+    const id = req.params.id;
+
+    if (!nome) {
+      return res.status(400).json("O nome é um campo obrigatório");
+    }
+    if (!estoque) {
+      return res.status(400).json("O estoque é um campo obrigatório");
+    }
+    if (!preco) {
+      return res.status(400).json("O preço é um campo obrigatório");
+    }
+    if (!descricao) {
+      return res.status(400).json("A descrição é um campo obrigatório");
+    }
+
+    const produto = await conexao.query(
+      `select * from produtos where id = $1`,
+      [id]
+    );
+
+    if (produto.rowCount > 0) {
+      if (produto.rows[0].usuario_id === usuario_id) {
+        const query = `
+        update produtos 
+        set nome = $1, estoque = $2, categoria = $3, preco = $4, descricao = $5, imagem = $6
+        where id = $7
+        `;
+
+        await conexao.query(query, [
+          nome,
+          estoque,
+          categoria,
+          preco,
+          descricao,
+          imagem,
+          id,
+        ]);
+        res.status(200).json("O produto foi atualizado!");
+      } else {
+        res.status(401).json("Você não possui esse produto cadastrado");
+      }
+    } else {
+      return res
+        .status(400)
+        .json("O Id informado não corresponde à nenhum produto");
+    }
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
 module.exports = {
   obterProdutos,
   obterProdutoPorId,
   cadastrarProduto,
+  atualizarProduto,
 };
