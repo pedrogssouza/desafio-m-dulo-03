@@ -147,9 +147,38 @@ async function atualizarProduto(req, res) {
   }
 }
 
+async function deletarProduto(req, res) {
+  try {
+    const token = req.headers.authorization.replace("Bearer ", "");
+    const { id: usuario_id } = jwt.verify(token, jwtSecret);
+    const id = req.params.id;
+
+    const produto = await conexao.query(
+      `select * from produtos where id = $1`,
+      [id]
+    );
+
+    if (produto.rowCount > 0) {
+      if (produto.rows[0].usuario_id === usuario_id) {
+        await conexao.query(`delete from produtos where id = $1`, [id]);
+        res.status(200).json("Produto deletado!");
+      } else {
+        res.status(401).json("Você não possui esse produto cadastrado");
+      }
+    } else {
+      return res
+        .status(400)
+        .json("O Id informado não corresponde à nenhum produto");
+    }
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
 module.exports = {
   obterProdutos,
   obterProdutoPorId,
   cadastrarProduto,
   atualizarProduto,
+  deletarProduto,
 };
