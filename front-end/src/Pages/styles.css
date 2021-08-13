@@ -1,0 +1,19 @@
+html {
+  margin-top: 20px;
+}
+
+body {
+  background-color: #e5e5e5;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-content: center;
+  margin-top: 20px;
+}
+
+.inputs {
+  margin: 45px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
