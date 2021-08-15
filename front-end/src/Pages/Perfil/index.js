@@ -1,6 +1,8 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import ErrorComponent from "../../Components/ErrorComponent";
+import { PerfilContext } from "../../Contexts/perfilContext";
 import useAPI from "../../useAPI";
 
 const useStyles = makeStyles({
@@ -13,14 +15,15 @@ const useStyles = makeStyles({
 export default function PerfilPage() {
   const classes = useStyles();
   const history = useHistory();
-  const [perfil, setPerfil] = useState({});
+  const { perfil, setPerfil } = useContext(PerfilContext);
   const { getPerfilRequest } = useAPI();
 
   useEffect(() => getPerfilRequest(setPerfil), []);
+
   return (
     <>
       <h3 className="subtitulo">Perfil</h3>
-      <div className="form_perfil">
+      <div className="form">
         <TextField
           disabled
           id="nome"
@@ -47,6 +50,7 @@ export default function PerfilPage() {
       >
         EDITAR PERFIL
       </Button>
+      <ErrorComponent />
     </>
   );
 }

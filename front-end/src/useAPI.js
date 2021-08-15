@@ -70,6 +70,29 @@ export default function useAPI() {
     setRequestError(dados);
   }
 
+  async function atualizarPerfilRequest(data, setPerfil) {
+    const response = await postProtectedRequest(
+      "http://localhost:8000/perfil",
+      "PUT",
+      data,
+      token
+    );
+
+    const dados = await response.json();
+
+    setRequestError("");
+
+    console.log(dados);
+
+    if (response.ok) {
+      setPerfil(...dados);
+      history.push("/perfil");
+      return;
+    }
+
+    setRequestError(dados);
+  }
+
   async function cadastroProdutoRequest(data) {
     const response = await postProtectedRequest(
       "http://localhost:8000/produtos",
@@ -90,10 +113,12 @@ export default function useAPI() {
 
     setRequestError(dados);
   }
+
   return {
     loginRequest,
     cadastroRequest,
     cadastroProdutoRequest,
     getPerfilRequest,
+    atualizarPerfilRequest,
   };
 }

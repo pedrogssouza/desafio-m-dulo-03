@@ -1,11 +1,13 @@
 import "./styles.css";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import useAPI from "../../useAPI";
+import { PerfilContext } from "../../Contexts/perfilContext";
 
 export default function StoreNameComponent(props) {
-  const [perfil, setPerfil] = useState({});
+  const { perfil, setPerfil } = useContext(PerfilContext);
   const { getPerfilRequest } = useAPI();
 
+  // useEffect(() => getPerfilRequest(setPerfil), [perfil]);
   useEffect(() => getPerfilRequest(setPerfil), []);
 
   return (

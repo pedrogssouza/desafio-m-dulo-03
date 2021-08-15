@@ -19,10 +19,10 @@ export default function Navbar(props) {
     <div className="page">
       <aside>
         <NavLink to="/produtos" onClick={() => setSelectedIcon(true)}>
-          <img src={selectedIcon ? storeSelected : store} />
+          <img src={selectedIcon ? storeSelected : store} alt="produtos" />
         </NavLink>
         <NavLink to="/perfil" onClick={() => setSelectedIcon(false)}>
-          <img src={selectedIcon ? user : userSelected} />
+          <img src={selectedIcon ? user : userSelected} alt="perfil" />
         </NavLink>
         <NavLink to="/" onClick={handleLogout}>
           <img src={close} alt="sair" />

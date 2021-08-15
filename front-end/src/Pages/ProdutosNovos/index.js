@@ -28,10 +28,10 @@ export default function ProdutosNovosPage() {
   const history = useHistory();
   const { cadastroProdutoRequest } = useAPI();
   return (
-    <div className="content">
+    <div>
       <h3 className="subtitulo">Adicionar Produto</h3>
       <form onSubmit={handleSubmit(cadastroProdutoRequest)}>
-        <div className="form_adicionar_produto">
+        <div className="form">
           <TextField
             label="Nome do produto"
             {...register("nome", { required: true })}
