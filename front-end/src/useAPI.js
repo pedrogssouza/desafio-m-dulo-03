@@ -82,10 +82,8 @@ export default function useAPI() {
 
     setRequestError("");
 
-    console.log(dados);
-
     if (response.ok) {
-      setPerfil(...dados);
+      setPerfil(dados);
       history.push("/perfil");
       return;
     }
@@ -93,7 +91,25 @@ export default function useAPI() {
     setRequestError(dados);
   }
 
-  async function cadastroProdutoRequest(data) {
+  async function getProdutosRequest(setProdutos) {
+    const response = await getProtectedRequest(
+      "http://localhost:8000/produtos",
+      token
+    );
+
+    const dados = await response.json();
+
+    setRequestError("");
+
+    if (response.ok) {
+      setProdutos(dados);
+      return;
+    }
+
+    setRequestError(dados);
+  }
+
+  async function cadastroProdutoRequest(data, setProdutoAlterado) {
     const response = await postProtectedRequest(
       "http://localhost:8000/produtos",
       "POST",
@@ -101,7 +117,6 @@ export default function useAPI() {
       token
     );
 
-    console.log(response);
     const dados = await response.json();
 
     setRequestError("");
@@ -111,6 +126,7 @@ export default function useAPI() {
       return;
     }
 
+    setProdutoAlterado(true);
     setRequestError(dados);
   }
 
@@ -120,5 +136,6 @@ export default function useAPI() {
     cadastroProdutoRequest,
     getPerfilRequest,
     atualizarPerfilRequest,
+    getProdutosRequest,
   };
 }

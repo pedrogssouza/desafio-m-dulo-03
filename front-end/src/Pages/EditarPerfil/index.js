@@ -32,7 +32,7 @@ export default function EditarPerfilPage() {
       return;
     }
 
-    atualizarPerfilRequest(data, setPerfil);
+    await atualizarPerfilRequest(data, setPerfil);
   }
   return (
     <div>

@@ -1,6 +1,10 @@
 import { Button, makeStyles } from "@material-ui/core";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { useHistory } from "react-router-dom";
+import useAPI from "../../useAPI";
+import { useContext, useEffect, useState } from "react";
+import { ProdutoAlteradoContext } from "../../Contexts/produtoAlteradoContext";
+import CardProduto from "../../Components/CardProduto";
 
 const useStyles = makeStyles({
   button: {
@@ -12,9 +16,35 @@ const useStyles = makeStyles({
 export default function ProdutosPage() {
   const classes = useStyles();
   const history = useHistory();
+  const [produtos, setProdutos] = useState();
+  const { produtoAlterado, setProdutoAlterado } = useContext(
+    ProdutoAlteradoContext
+  );
+  const { getProdutosRequest } = useAPI();
+
+  async function getProdutos() {
+    await getProdutosRequest(setProdutos);
+  }
+
+  useEffect(getProdutos, []);
+
   return (
     <div className="content">
       <h3 className="subtitulo">Seus produtos</h3>
+      <div className="grid">
+        {produtos &&
+          produtos.map((produto) => {
+            return (
+              <CardProduto
+                imagem={produto.imagem}
+                nome={produto.nome}
+                descricao={produto.descricao}
+                estoque={produto.estoque}
+                preco={produto.preco}
+              />
+            );
+          })}
+      </div>
       <hr className="linha"></hr>
       <Button
         className={classes.button}

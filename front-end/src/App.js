@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./Contexts/authContext";
 import { ErrorContext } from "./Contexts/errorContext";
 import { PerfilContext } from "./Contexts/perfilContext";
+import { ProdutoAlteradoContext } from "./Contexts/produtoAlteradoContext";
 import Navbar from "./Components/Navbar";
 import StoreNameComponent from "./Components/StoreName/StoreNameComponent";
 import ProdutosNovosPage from "./Pages/ProdutosNovos";
@@ -29,29 +30,37 @@ function App() {
   const [token, setToken] = useState("");
   const [requestError, setRequestError] = useState("");
   const [perfil, setPerfil] = useState({});
+  const [produtoAlterado, setProdutoAlterado] = useState(false);
   return (
     <AuthContext.Provider value={{ token, setToken }}>
       <ErrorContext.Provider value={{ requestError, setRequestError }}>
         <PerfilContext.Provider value={{ perfil, setPerfil }}>
-          <Router>
-            <Switch>
-              <Route path="/" exact component={LoginPage} />
-              <Route path="/cadastro" component={CadastroPage} />
-              <RotasProtegidas>
-                <Navbar>
-                  <StoreNameComponent>
-                    <Route
-                      path="/produtos/novo"
-                      component={ProdutosNovosPage}
-                    />
-                    <Route path="/produtos" exact component={ProdutosPage} />
-                    <Route path="/perfil" exact component={PerfilPage} />
-                    <Route path="/perfil/editar" component={EditarPerfilPage} />
-                  </StoreNameComponent>
-                </Navbar>
-              </RotasProtegidas>
-            </Switch>
-          </Router>
+          <ProdutoAlteradoContext.Provider
+            value={{ produtoAlterado, setProdutoAlterado }}
+          >
+            <Router>
+              <Switch>
+                <Route path="/" exact component={LoginPage} />
+                <Route path="/cadastro" component={CadastroPage} />
+                <RotasProtegidas>
+                  <Navbar>
+                    <StoreNameComponent>
+                      <Route
+                        path="/produtos/novo"
+                        component={ProdutosNovosPage}
+                      />
+                      <Route path="/produtos" exact component={ProdutosPage} />
+                      <Route path="/perfil" exact component={PerfilPage} />
+                      <Route
+                        path="/perfil/editar"
+                        component={EditarPerfilPage}
+                      />
+                    </StoreNameComponent>
+                  </Navbar>
+                </RotasProtegidas>
+              </Switch>
+            </Router>
+          </ProdutoAlteradoContext.Provider>
         </PerfilContext.Provider>
       </ErrorContext.Provider>
     </AuthContext.Provider>

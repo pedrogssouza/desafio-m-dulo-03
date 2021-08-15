@@ -18,7 +18,11 @@ export default function PerfilPage() {
   const { perfil, setPerfil } = useContext(PerfilContext);
   const { getPerfilRequest } = useAPI();
 
-  useEffect(() => getPerfilRequest(setPerfil), []);
+  async function getPerfil() {
+    await getPerfilRequest(setPerfil);
+  }
+
+  useEffect(getPerfil, []);
 
   return (
     <>

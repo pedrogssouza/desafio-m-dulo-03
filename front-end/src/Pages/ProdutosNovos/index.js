@@ -8,12 +8,12 @@ import {
   Input,
   InputLabel,
 } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { Link } from "react-router-dom";
 import useAPI from "../../useAPI";
+import { ProdutoAlteradoContext } from "../../Contexts/produtoAlteradoContext";
 
 const useStyles = makeStyles({
   button: {
@@ -23,14 +23,18 @@ const useStyles = makeStyles({
 });
 
 export default function ProdutosNovosPage() {
-  const { handleSubmit, register } = useForm();
   const classes = useStyles();
-  const history = useHistory();
+  const { handleSubmit, register } = useForm();
   const { cadastroProdutoRequest } = useAPI();
+  const { setProdutoAlterado } = useContext(ProdutoAlteradoContext);
   return (
     <div>
       <h3 className="subtitulo">Adicionar Produto</h3>
-      <form onSubmit={handleSubmit(cadastroProdutoRequest)}>
+      <form
+        onSubmit={handleSubmit((data) =>
+          cadastroProdutoRequest(data, setProdutoAlterado)
+        )}
+      >
         <div className="form">
           <TextField
             label="Nome do produto"
@@ -45,7 +49,7 @@ export default function ProdutosNovosPage() {
                 id="preco"
                 type="number"
                 startAdornment={
-                  <InputAdornment position="start">Kg</InputAdornment>
+                  <InputAdornment position="start">R$</InputAdornment>
                 }
               ></Input>
             </FormControl>

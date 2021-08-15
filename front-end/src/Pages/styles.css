@@ -32,7 +32,12 @@ body {
 
 .linha {
   width: 70%;
-  margin-left: 0;
-  margin-bottom: 40px;
+  margin: 40px auto 40px 0;
   border-top: 1px dotted #000;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 240px);
+  gap: 36px;
 }
