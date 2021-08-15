@@ -1,0 +1,16 @@
+.form_adicionar_produto {
+  width: 39%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+.inputs_preco_qtd {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  margin-right: 30px;
+}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "../styles.css";
 import {
   Button,
@@ -7,14 +7,12 @@ import {
   makeStyles,
   TextField,
   Typography,
-  Snackbar,
 } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router-dom";
-import InputSenha from "../../Components/ComponentSenha";
+import InputSenha from "../../Components/SenhaComponent";
 import { useForm } from "react-hook-form";
 import useAPI from "../../useAPI";
-import { ErrorContext } from "../../Contexts/errorContext";
+import ErrorComponent from "../../Components/ErrorComponent";
 
 const useStyles = makeStyles({
   card: {
@@ -37,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Cadastro() {
+export default function CadastroPage() {
   const history = useHistory();
   const classes = useStyles();
   const {
@@ -46,7 +44,6 @@ export default function Cadastro() {
     formState: { errors },
     setError,
   } = useForm();
-  const { requestError, setRequestError } = useContext(ErrorContext);
   const { cadastroRequest } = useAPI();
 
   async function cadastro(data) {
@@ -59,7 +56,7 @@ export default function Cadastro() {
     cadastroRequest(data);
   }
   return (
-    <form onSubmit={handleSubmit(cadastro)}>
+    <form className="first_form" onSubmit={handleSubmit(cadastro)}>
       <Card className={classes.card}>
         <Typography component="h2" variant="h4">
           Criar uma conta
@@ -101,13 +98,7 @@ export default function Cadastro() {
           Já possui uma conta?
           <Link onClick={() => history.push("/")}>ACESSE</Link>
         </Typography>
-        <Snackbar
-          open={!!requestError}
-          autoHideDuration={6000}
-          onClose={() => setRequestError("")}
-        >
-          <Alert severity="error">{requestError}</Alert>
-        </Snackbar>
+        <ErrorComponent />
       </Card>
     </form>
   );

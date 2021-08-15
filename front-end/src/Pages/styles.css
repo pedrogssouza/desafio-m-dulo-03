@@ -1,5 +1,7 @@
-html {
-  margin-top: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+* {
+  font-family: "Roboto";
+  letter-spacing: 0.25px;
 }
 
 body {
@@ -8,7 +10,6 @@ body {
   margin: 0;
   display: grid;
   place-content: center;
-  margin-top: 20px;
 }
 
 .inputs {
@@ -16,4 +17,21 @@ body {
   display: flex;
   flex-direction: column;
   gap: 35px;
+}
+
+.first_form {
+  width: 30%;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.seus_produtos {
+  font-size: 34px;
+  font-weight: 300;
+}
+
+.linha {
+  width: 70%;
+  margin-left: 0;
+  margin-bottom: 40px;
 }

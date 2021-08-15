@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "./Contexts/authContext";
 import { ErrorContext } from "./Contexts/errorContext";
-import { request, protectedRequest } from "./Pages/requests";
+import {
+  postRequest,
+  postProtectedRequest,
+  getProtectedRequest,
+} from "./Pages/requests";
 
 export default function useAPI() {
   const { token, setToken } = useContext(AuthContext);
@@ -10,14 +14,17 @@ export default function useAPI() {
   const history = useHistory();
 
   async function loginRequest(data) {
-    const response = await request("http://localhost:8000/login", "POST", data);
+    const response = await postRequest(
+      "http://localhost:8000/login",
+      "POST",
+      data
+    );
 
     const dados = await response.json();
 
     setRequestError("");
 
     if (response.ok) {
-      console.log(dados);
       setToken(dados.token);
       history.push("/produtos");
       return;
@@ -27,7 +34,7 @@ export default function useAPI() {
   }
 
   async function cadastroRequest(data) {
-    const response = await request(
+    const response = await postRequest(
       "http://localhost:8000/cadastro",
       "POST",
       data
@@ -38,8 +45,46 @@ export default function useAPI() {
     setRequestError("");
 
     if (response.ok) {
-      console.log(dados);
       history.push("/");
+      return;
+    }
+
+    setRequestError(dados);
+  }
+
+  async function getPerfilRequest(setPerfil) {
+    const response = await getProtectedRequest(
+      "http://localhost:8000/perfil",
+      token
+    );
+
+    const dados = await response.json();
+
+    setRequestError("");
+
+    if (response.ok) {
+      setPerfil(dados);
+      return;
+    }
+
+    setRequestError(dados);
+  }
+
+  async function cadastroProdutoRequest(data) {
+    const response = await postProtectedRequest(
+      "http://localhost:8000/produtos",
+      "POST",
+      data,
+      token
+    );
+
+    console.log(response);
+    const dados = await response.json();
+
+    setRequestError("");
+
+    if (response.ok) {
+      history.push("/produtos");
       return;
     }
 
@@ -48,5 +93,7 @@ export default function useAPI() {
   return {
     loginRequest,
     cadastroRequest,
+    cadastroProdutoRequest,
+    getPerfilRequest,
   };
 }

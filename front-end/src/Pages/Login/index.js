@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import "../styles.css";
 import {
   Button,
@@ -7,14 +7,12 @@ import {
   makeStyles,
   TextField,
   Typography,
-  Snackbar,
 } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import InputSenha from "../../Components/ComponentSenha";
+import InputSenha from "../../Components/SenhaComponent";
 import useAPI from "../../useAPI";
-import { ErrorContext } from "../../Contexts/errorContext";
+import ErrorComponent from "../../Components/ErrorComponent";
 
 const useStyles = makeStyles({
   card: {
@@ -45,11 +43,10 @@ export default function LoginPage() {
     register,
     formState: { errors },
   } = useForm();
-  const { requestError, setRequestError } = useContext(ErrorContext);
   const { loginRequest } = useAPI();
 
   return (
-    <form onSubmit={handleSubmit(loginRequest)}>
+    <form className="first_form" onSubmit={handleSubmit(loginRequest)}>
       <Card className={classes.card}>
         <Typography component="h2" variant="h4">
           Login
@@ -59,7 +56,7 @@ export default function LoginPage() {
             label="E-mail"
             {...register("email", { required: true })}
             error={errors.email ? true : false}
-          ></TextField>
+          />
           <InputSenha
             id="senha"
             label="Senha"
@@ -74,13 +71,7 @@ export default function LoginPage() {
           Primeira vez aqui?
           <Link onClick={() => history.push("/cadastro")}>CRIE UMA CONTA</Link>
         </Typography>
-        <Snackbar
-          open={!!requestError}
-          autoHideDuration={6000}
-          onClose={() => setRequestError("")}
-        >
-          <Alert severity="error">{requestError}</Alert>
-        </Snackbar>
+        <ErrorComponent />
       </Card>
     </form>
   );

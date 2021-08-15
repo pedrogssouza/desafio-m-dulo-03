@@ -1,4 +1,4 @@
-export async function request(endPoint, method, data) {
+export async function postRequest(endPoint, method, data) {
   const response = await fetch(endPoint, {
     method: method,
     body: JSON.stringify(data),
@@ -10,12 +10,23 @@ export async function request(endPoint, method, data) {
   return response;
 }
 
-export async function protectedRequest(endPoint, method, data, token) {
+export async function postProtectedRequest(endPoint, method, data, token) {
   const response = await fetch(endPoint, {
     method: method,
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+}
+
+export async function getProtectedRequest(endPoint, token) {
+  const response = await fetch(endPoint, {
+    method: "GET",
+    headers: {
       Authorization: `Bearer ${token}`,
     },
   });
