@@ -79,7 +79,7 @@ async function cadastrarProduto(req, res) {
       nome,
       estoque,
       categoria,
-      preco,
+      preco * 100,
       descricao,
       imagem,
       usuario_id,
