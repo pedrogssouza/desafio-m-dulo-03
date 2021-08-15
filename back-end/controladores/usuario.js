@@ -154,8 +154,6 @@ async function atualizarUsuario(req, res) {
       [id]
     );
 
-    console.log(usuario);
-
     if (email !== usuario.rows[0].email) {
       const buscaDeUsuarioPeloEmail = await conexao.query(
         "select * from usuarios where email=$1",
@@ -172,7 +170,7 @@ async function atualizarUsuario(req, res) {
     const query = `update usuarios set nome=$1, email=$2, senha=$3, nome_loja=$4 where id = $5 `;
     await conexao.query(query, [nome, email, hash, nome_loja, id]);
 
-    res.status(204).json("Usuário atualizado com sucesso!");
+    res.status(200).json("Usuário atualizado com sucesso!");
   } catch (error) {
     return res.status(400).json(error.message);
   }
