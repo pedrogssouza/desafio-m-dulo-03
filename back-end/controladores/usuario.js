@@ -154,7 +154,9 @@ async function atualizarUsuario(req, res) {
       [id]
     );
 
-    if (email !== usuario.email) {
+    console.log(usuario);
+
+    if (email !== usuario.rows[0].email) {
       const buscaDeUsuarioPeloEmail = await conexao.query(
         "select * from usuarios where email=$1",
         [email]
