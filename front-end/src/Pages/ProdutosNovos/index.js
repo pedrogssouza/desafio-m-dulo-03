@@ -29,7 +29,7 @@ export default function ProdutosNovosPage() {
   const { cadastroProdutoRequest } = useAPI();
   return (
     <div className="content">
-      <h3 className="seus_produtos">Adicionar Produto</h3>
+      <h3 className="subtitulo">Adicionar Produto</h3>
       <form onSubmit={handleSubmit(cadastroProdutoRequest)}>
         <div className="form_adicionar_produto">
           <TextField

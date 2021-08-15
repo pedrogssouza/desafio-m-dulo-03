@@ -14,7 +14,7 @@ export default function ProdutosPage() {
   const history = useHistory();
   return (
     <div className="content">
-      <h3 className="seus_produtos">Seus produtos</h3>
+      <h3 className="subtitulo">Seus produtos</h3>
       <hr className="linha"></hr>
       <Button
         className={classes.button}

@@ -25,7 +25,7 @@ body {
   margin: 20px auto 0;
 }
 
-.seus_produtos {
+.subtitulo {
   font-size: 34px;
   font-weight: 300;
 }
@@ -34,4 +34,5 @@ body {
   width: 70%;
   margin-left: 0;
   margin-bottom: 40px;
+  border-top: 1px dotted #000;
 }

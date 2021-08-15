@@ -1,4 +1,5 @@
-.form_adicionar_produto {
+.form_adicionar_produto,
+.form_perfil {
   width: 39%;
   display: flex;
   flex-direction: column;
