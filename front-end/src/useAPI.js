@@ -6,6 +6,7 @@ import {
   postRequest,
   postProtectedRequest,
   getProtectedRequest,
+  deleteProtectedRequest,
 } from "./Pages/requests";
 
 export default function useAPI() {
@@ -14,11 +15,7 @@ export default function useAPI() {
   const history = useHistory();
 
   async function loginRequest(data) {
-    const response = await postRequest(
-      "http://localhost:8000/login",
-      "POST",
-      data
-    );
+    const response = await postRequest("http://localhost:8000/login", data);
 
     const dados = await response.json();
 
@@ -34,11 +31,7 @@ export default function useAPI() {
   }
 
   async function cadastroRequest(data) {
-    const response = await postRequest(
-      "http://localhost:8000/cadastro",
-      "POST",
-      data
-    );
+    const response = await postRequest("http://localhost:8000/cadastro", data);
 
     const dados = await response.json();
 
@@ -109,7 +102,7 @@ export default function useAPI() {
     setRequestError(dados);
   }
 
-  async function cadastroProdutoRequest(data, setProdutoAlterado) {
+  async function cadastroProdutoRequest(data) {
     const response = await postProtectedRequest(
       "http://localhost:8000/produtos",
       "POST",
@@ -126,7 +119,23 @@ export default function useAPI() {
       return;
     }
 
-    setProdutoAlterado(true);
+    setRequestError(dados);
+  }
+
+  async function deleteProdutoRequest(id) {
+    const response = await deleteProtectedRequest(
+      `http://localhost:8000/produtos/${id}`,
+      token
+    );
+
+    const dados = await response.json();
+
+    setRequestError("");
+
+    if (response.ok) {
+      return;
+    }
+
     setRequestError(dados);
   }
 
@@ -137,5 +146,6 @@ export default function useAPI() {
     getPerfilRequest,
     atualizarPerfilRequest,
     getProdutosRequest,
+    deleteProdutoRequest,
   };
 }

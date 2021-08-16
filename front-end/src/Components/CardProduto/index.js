@@ -2,13 +2,14 @@ import {
   Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   makeStyles,
   Typography,
 } from "@material-ui/core";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
+import { useState } from "react";
+import { CardRemoverProduto } from "../CardRemoverProduto";
 const useStyles = makeStyles({
   root: {
     maxWidth: 240,
@@ -47,12 +48,28 @@ const useStyles = makeStyles({
 
 export default function CardProduto(props) {
   const classes = useStyles();
+  const [removerProduto, setRemoverProduto] = useState(false);
+  const handleClose = () => {
+    setRemoverProduto(false);
+  };
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <Button className={classes.button}>
+        <Button
+          className={classes.button}
+          onClick={() => setRemoverProduto(true)}
+        >
           <DeleteSweepIcon></DeleteSweepIcon>
         </Button>
+        {removerProduto ? (
+          <CardRemoverProduto
+            removerProduto={removerProduto}
+            handleClose={handleClose}
+            id={props.id}
+          ></CardRemoverProduto>
+        ) : (
+          ""
+        )}
         <CardMedia
           className={classes.media}
           image={`${props.imagem}`}

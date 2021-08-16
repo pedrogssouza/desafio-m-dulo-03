@@ -8,12 +8,11 @@ import {
   Input,
   InputLabel,
 } from "@material-ui/core";
-import React, { useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { Link } from "react-router-dom";
 import useAPI from "../../useAPI";
-import { ProdutoAlteradoContext } from "../../Contexts/produtoAlteradoContext";
 
 const useStyles = makeStyles({
   button: {
@@ -26,15 +25,10 @@ export default function ProdutosNovosPage() {
   const classes = useStyles();
   const { handleSubmit, register } = useForm();
   const { cadastroProdutoRequest } = useAPI();
-  const { setProdutoAlterado } = useContext(ProdutoAlteradoContext);
   return (
     <div>
       <h3 className="subtitulo">Adicionar Produto</h3>
-      <form
-        onSubmit={handleSubmit((data) =>
-          cadastroProdutoRequest(data, setProdutoAlterado)
-        )}
-      >
+      <form onSubmit={handleSubmit(cadastroProdutoRequest)}>
         <div className="form">
           <TextField
             label="Nome do produto"

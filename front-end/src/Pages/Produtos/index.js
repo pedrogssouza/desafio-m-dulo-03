@@ -2,8 +2,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { useHistory } from "react-router-dom";
 import useAPI from "../../useAPI";
-import { useContext, useEffect, useState } from "react";
-import { ProdutoAlteradoContext } from "../../Contexts/produtoAlteradoContext";
+import { useEffect, useState } from "react";
 import CardProduto from "../../Components/CardProduto";
 
 const useStyles = makeStyles({
@@ -17,9 +16,6 @@ export default function ProdutosPage() {
   const classes = useStyles();
   const history = useHistory();
   const [produtos, setProdutos] = useState();
-  const { produtoAlterado, setProdutoAlterado } = useContext(
-    ProdutoAlteradoContext
-  );
   const { getProdutosRequest } = useAPI();
 
   async function getProdutos() {
@@ -41,6 +37,7 @@ export default function ProdutosPage() {
                 descricao={produto.descricao}
                 estoque={produto.estoque}
                 preco={produto.preco}
+                id={produto.id}
               />
             );
           })}

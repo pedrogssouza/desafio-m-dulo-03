@@ -18,11 +18,12 @@ export default function PerfilPage() {
   const { perfil, setPerfil } = useContext(PerfilContext);
   const { getPerfilRequest } = useAPI();
 
-  async function getPerfil() {
-    await getPerfilRequest(setPerfil);
-  }
-
-  useEffect(getPerfil, []);
+  useEffect(() => {
+    async function getPerfil() {
+      await getPerfilRequest(setPerfil);
+    }
+    getPerfil();
+  }, []);
 
   return (
     <>
