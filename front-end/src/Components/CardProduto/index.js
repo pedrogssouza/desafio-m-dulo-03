@@ -22,12 +22,11 @@ const useStyles = makeStyles({
     position: "relative",
     top: -100,
   },
-  button: {
+  botao: {
     backgroundColor: "#FF505F",
     width: 48,
     height: 48,
-    borderRadius: 24,
-    boxSizing: "border-box",
+    borderRadius: "50%",
     margin: "22px 22px",
     display: "inline",
     zIndex: 1,
@@ -56,7 +55,7 @@ export default function CardProduto(props) {
     <Card className={classes.root}>
       <CardActionArea>
         <Button
-          className={classes.button}
+          className={classes.botao}
           onClick={() => setRemoverProduto(true)}
         >
           <DeleteSweepIcon></DeleteSweepIcon>

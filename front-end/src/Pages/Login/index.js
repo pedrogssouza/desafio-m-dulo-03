@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import InputSenha from "../../Components/SenhaComponent";
 import useAPI from "../../useAPI";
 import ErrorComponent from "../../Components/ErrorComponent";
+import LoadingComponent from "../../Components/Loading";
 
 const useStyles = makeStyles({
   card: {
@@ -72,6 +73,7 @@ export default function LoginPage() {
           <Link onClick={() => history.push("/cadastro")}>CRIE UMA CONTA</Link>
         </Typography>
         <ErrorComponent />
+        <LoadingComponent />
       </Card>
     </form>
   );

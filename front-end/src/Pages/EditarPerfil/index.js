@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import ErrorComponent from "../../Components/ErrorComponent";
+import LoadingComponent from "../../Components/Loading";
 import InputSenha from "../../Components/SenhaComponent";
 import { PerfilContext } from "../../Contexts/perfilContext";
 import useAPI from "../../useAPI";
@@ -23,7 +24,6 @@ export default function EditarPerfilPage() {
     setError,
   } = useForm();
   const { atualizarPerfilRequest } = useAPI();
-  const { setPerfil } = useContext(PerfilContext);
 
   async function atualizarPerfil(data) {
     if (data.senha !== data.senha_repetida) {
@@ -32,7 +32,7 @@ export default function EditarPerfilPage() {
       return;
     }
 
-    await atualizarPerfilRequest(data, setPerfil);
+    await atualizarPerfilRequest(data);
   }
   return (
     <div>
@@ -76,6 +76,7 @@ export default function EditarPerfilPage() {
         </Button>
       </form>
       <ErrorComponent />
+      <LoadingComponent />
     </div>
   );
 }

@@ -11,6 +11,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./Contexts/authContext";
 import { ErrorContext } from "./Contexts/errorContext";
 import { PerfilContext } from "./Contexts/perfilContext";
+import { ProdutosContext } from "./Contexts/produtosContext";
+import { LoadingContext } from "./Contexts/loadingContext";
 import Navbar from "./Components/Navbar";
 import StoreNameComponent from "./Components/StoreName/StoreNameComponent";
 import ProdutosNovosPage from "./Pages/ProdutosNovos";
@@ -26,32 +28,48 @@ function RotasProtegidas(props) {
 }
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() => {
+    const token = localStorage.getItem("token");
+    return token || "";
+  });
   const [requestError, setRequestError] = useState("");
   const [perfil, setPerfil] = useState({});
+  const [produtos, setProdutos] = useState();
+  const [loading, setLoading] = useState(false);
   return (
     <AuthContext.Provider value={{ token, setToken }}>
       <ErrorContext.Provider value={{ requestError, setRequestError }}>
         <PerfilContext.Provider value={{ perfil, setPerfil }}>
-          <Router>
-            <Switch>
-              <Route path="/" exact component={LoginPage} />
-              <Route path="/cadastro" component={CadastroPage} />
-              <RotasProtegidas>
-                <Navbar>
-                  <StoreNameComponent>
-                    <Route
-                      path="/produtos/novo"
-                      component={ProdutosNovosPage}
-                    />
-                    <Route path="/produtos" exact component={ProdutosPage} />
-                    <Route path="/perfil" exact component={PerfilPage} />
-                    <Route path="/perfil/editar" component={EditarPerfilPage} />
-                  </StoreNameComponent>
-                </Navbar>
-              </RotasProtegidas>
-            </Switch>
-          </Router>
+          <ProdutosContext.Provider value={{ produtos, setProdutos }}>
+            <LoadingContext.Provider value={{ loading, setLoading }}>
+              <Router>
+                <Switch>
+                  <Route path="/" exact component={LoginPage} />
+                  <Route path="/cadastro" component={CadastroPage} />
+                  <RotasProtegidas>
+                    <Navbar>
+                      <StoreNameComponent>
+                        <Route
+                          path="/produtos/novo"
+                          component={ProdutosNovosPage}
+                        />
+                        <Route
+                          path="/produtos"
+                          exact
+                          component={ProdutosPage}
+                        />
+                        <Route path="/perfil" exact component={PerfilPage} />
+                        <Route
+                          path="/perfil/editar"
+                          component={EditarPerfilPage}
+                        />
+                      </StoreNameComponent>
+                    </Navbar>
+                  </RotasProtegidas>
+                </Switch>
+              </Router>
+            </LoadingContext.Provider>
+          </ProdutosContext.Provider>
         </PerfilContext.Provider>
       </ErrorContext.Provider>
     </AuthContext.Provider>

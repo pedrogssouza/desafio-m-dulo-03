@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { Link } from "react-router-dom";
 import useAPI from "../../useAPI";
+import LoadingComponent from "../../Components/Loading";
 
 const useStyles = makeStyles({
   button: {
@@ -75,6 +76,7 @@ export default function ProdutosNovosPage() {
         </Button>
       </form>
       <ErrorComponent />
+      <LoadingComponent />
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default function Navbar(props) {
   const [selectedIcon, setSelectedIcon] = useState(true);
   function handleLogout() {
     setToken("");
+    localStorage.removeItem("token");
   }
 
   return (

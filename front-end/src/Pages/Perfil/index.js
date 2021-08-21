@@ -1,7 +1,8 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorComponent from "../../Components/ErrorComponent";
+import LoadingComponent from "../../Components/Loading";
 import { PerfilContext } from "../../Contexts/perfilContext";
 import useAPI from "../../useAPI";
 
@@ -15,12 +16,14 @@ const useStyles = makeStyles({
 export default function PerfilPage() {
   const classes = useStyles();
   const history = useHistory();
-  const { perfil, setPerfil } = useContext(PerfilContext);
+  const {
+    perfil: { nome, nome_loja, email },
+  } = useContext(PerfilContext);
   const { getPerfilRequest } = useAPI();
 
   useEffect(() => {
     async function getPerfil() {
-      await getPerfilRequest(setPerfil);
+      await getPerfilRequest();
     }
     getPerfil();
   }, []);
@@ -29,24 +32,14 @@ export default function PerfilPage() {
     <>
       <h3 className="subtitulo">Perfil</h3>
       <div className="form">
-        <TextField
-          disabled
-          id="nome"
-          label="Seu nome"
-          defaultValue={perfil.nome}
-        />
+        <TextField disabled id="nome" label="Seu nome" defaultValue={nome} />
         <TextField
           disabled
           id="nome_loja"
           label="Nome da loja"
-          defaultValue={perfil.nome_loja}
+          defaultValue={nome_loja}
         />
-        <TextField
-          disabled
-          id="email"
-          label="Email"
-          defaultValue={perfil.email}
-        />
+        <TextField disabled id="email" label="Email" defaultValue={email} />
       </div>
       <hr className="linha"></hr>
       <Button
@@ -56,6 +49,7 @@ export default function PerfilPage() {
         EDITAR PERFIL
       </Button>
       <ErrorComponent />
+      <LoadingComponent />
     </>
   );
 }

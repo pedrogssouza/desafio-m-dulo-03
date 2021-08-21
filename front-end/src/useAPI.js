@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "./Contexts/authContext";
 import { ErrorContext } from "./Contexts/errorContext";
+import { LoadingContext } from "./Contexts/loadingContext";
+import { PerfilContext } from "./Contexts/perfilContext";
+import { ProdutosContext } from "./Contexts/produtosContext";
 import {
   postRequest,
   postProtectedRequest,
@@ -12,17 +15,25 @@ import {
 export default function useAPI() {
   const { token, setToken } = useContext(AuthContext);
   const { setRequestError } = useContext(ErrorContext);
+  const { setPerfil } = useContext(PerfilContext);
+  const { setProdutos } = useContext(ProdutosContext);
+  const { setLoading } = useContext(LoadingContext);
   const history = useHistory();
 
   async function loginRequest(data) {
+    setLoading(true);
+
     const response = await postRequest("http://localhost:8000/login", data);
 
     const dados = await response.json();
+
+    setLoading(false);
 
     setRequestError("");
 
     if (response.ok) {
       setToken(dados.token);
+      localStorage.setItem("token", dados.token);
       history.push("/produtos");
       return;
     }
@@ -31,9 +42,13 @@ export default function useAPI() {
   }
 
   async function cadastroRequest(data) {
+    setLoading(true);
+
     const response = await postRequest("http://localhost:8000/cadastro", data);
 
     const dados = await response.json();
+
+    setLoading(false);
 
     setRequestError("");
 
@@ -45,7 +60,9 @@ export default function useAPI() {
     setRequestError(dados);
   }
 
-  async function getPerfilRequest(setPerfil) {
+  async function getPerfilRequest() {
+    setLoading(true);
+
     const response = await getProtectedRequest(
       "http://localhost:8000/perfil",
       token
@@ -53,9 +70,12 @@ export default function useAPI() {
 
     const dados = await response.json();
 
+    setLoading(false);
+
     setRequestError("");
 
     if (response.ok) {
+      console.log(dados);
       setPerfil(dados);
       return;
     }
@@ -63,7 +83,9 @@ export default function useAPI() {
     setRequestError(dados);
   }
 
-  async function atualizarPerfilRequest(data, setPerfil) {
+  async function atualizarPerfilRequest(data) {
+    setLoading(true);
+
     const response = await postProtectedRequest(
       "http://localhost:8000/perfil",
       "PUT",
@@ -78,19 +100,24 @@ export default function useAPI() {
     if (response.ok) {
       setPerfil(dados);
       history.push("/perfil");
+      setLoading(false);
       return;
     }
 
     setRequestError(dados);
   }
 
-  async function getProdutosRequest(setProdutos) {
+  async function getProdutosRequest() {
+    setLoading(true);
+
     const response = await getProtectedRequest(
       "http://localhost:8000/produtos",
       token
     );
 
     const dados = await response.json();
+
+    setLoading(false);
 
     setRequestError("");
 
@@ -103,6 +130,8 @@ export default function useAPI() {
   }
 
   async function cadastroProdutoRequest(data) {
+    setLoading(true);
+
     const response = await postProtectedRequest(
       "http://localhost:8000/produtos",
       "POST",
@@ -111,6 +140,8 @@ export default function useAPI() {
     );
 
     const dados = await response.json();
+
+    setLoading(false);
 
     setRequestError("");
 
@@ -123,12 +154,16 @@ export default function useAPI() {
   }
 
   async function deleteProdutoRequest(id) {
+    setLoading(true);
+
     const response = await deleteProtectedRequest(
       `http://localhost:8000/produtos/${id}`,
       token
     );
 
     const dados = await response.json();
+
+    setLoading(false);
 
     setRequestError("");
 

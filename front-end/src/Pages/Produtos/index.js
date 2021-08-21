@@ -2,8 +2,10 @@ import { Button, makeStyles } from "@material-ui/core";
 import ErrorComponent from "../../Components/ErrorComponent";
 import { useHistory } from "react-router-dom";
 import useAPI from "../../useAPI";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import CardProduto from "../../Components/CardProduto";
+import { ProdutosContext } from "../../Contexts/produtosContext";
+import LoadingComponent from "../../Components/Loading";
 
 const useStyles = makeStyles({
   button: {
@@ -15,11 +17,11 @@ const useStyles = makeStyles({
 export default function ProdutosPage() {
   const classes = useStyles();
   const history = useHistory();
-  const [produtos, setProdutos] = useState();
+  const { produtos } = useContext(ProdutosContext);
   const { getProdutosRequest } = useAPI();
 
   async function getProdutos() {
-    await getProdutosRequest(setProdutos);
+    await getProdutosRequest();
   }
 
   useEffect(getProdutos, []);
@@ -50,6 +52,7 @@ export default function ProdutosPage() {
         Adicionar Produto
       </Button>
       <ErrorComponent />
+      <LoadingComponent />
     </div>
   );
 }

@@ -13,6 +13,7 @@ import InputSenha from "../../Components/SenhaComponent";
 import { useForm } from "react-hook-form";
 import useAPI from "../../useAPI";
 import ErrorComponent from "../../Components/ErrorComponent";
+import LoadingComponent from "../../Components/Loading";
 
 const useStyles = makeStyles({
   card: {
@@ -99,6 +100,7 @@ export default function CadastroPage() {
           <Link onClick={() => history.push("/")}>ACESSE</Link>
         </Typography>
         <ErrorComponent />
+        <LoadingComponent />
       </Card>
     </form>
   );

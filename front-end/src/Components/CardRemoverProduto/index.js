@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function CardRemoverProduto(props) {
   const classes = useStyles();
-  const { deleteProdutoRequest } = useAPI();
+  const { deleteProdutoRequest, getProdutosRequest } = useAPI();
   return (
     <Backdrop
       className={classes.backdrop}
@@ -62,7 +62,10 @@ export function CardRemoverProduto(props) {
             <Button className={classes.blue_button}>MANTER PRODUTO</Button>
             <Button
               className={classes.red_button}
-              onClick={() => deleteProdutoRequest(props.id)}
+              onClick={() => {
+                deleteProdutoRequest(props.id);
+                getProdutosRequest();
+              }}
             >
               REMOVER
             </Button>
